@@ -1,5 +1,11 @@
 # coding: utf-8
+import sys
 import os
+module_path = os.path.realpath(__file__)
+module_path = os.path.join(module_path, os.path.pardir, os.path.pardir, os.path.pardir)
+module_path = os.path.abspath(module_path)
+print(module_path)
+sys.path.append(module_path)
 import curses
 import pickle
 from copy import copy

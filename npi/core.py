@@ -5,14 +5,20 @@ from copy import copy
 
 import numpy as np
 
-MAX_ARG_NUM = 3
+MAX_ARG_NUM = 3  # current program argument, 3 for addition, see page 6
 ARG_DEPTH = 10   # 0~9 digit. one-hot.
 
+# see page 5 Algorithm 1
 PG_CONTINUE = 0
 PG_RETURN = 1
 
 
 class IntegerArguments:
+    """
+    This class rep. a^t in the paper
+    When it comes to addition, there are three arguments(input1, input2, carry)
+    Notice: a^t is one-hot rep. , so size is 3*10
+    """
     depth = ARG_DEPTH
     max_arg_num = MAX_ARG_NUM
     size_of_arguments = depth * max_arg_num
@@ -47,6 +53,10 @@ class IntegerArguments:
 
 
 class Program:
+    """
+    This class rep. a single programme
+    Such as add1, LShift ...
+    """
     output_to_env = False
 
     def __init__(self, name, *args):
@@ -71,6 +81,12 @@ class Program:
 
 
 class StepInput:
+    """
+    The input of NPI: e^t, a^t, p^t
+    env = e^t
+    programme = p^t
+    arguments = a^t
+    """
     def __init__(self, env: np.ndarray, program: Program, arguments: IntegerArguments):
         self.env = env
         self.program = program
@@ -78,6 +94,12 @@ class StepInput:
 
 
 class StepOutput:
+    """
+    The output of NPI (see page 4): r^t, k^t, a^(t+1)
+    r = r^t, the end-of-programme prob.
+    program = k^t, program key embedding, which is used to determine which programme to use next time
+    arguments = a^(t+1), output of time t, aka input of time (t+1)
+    """
     def __init__(self, r: float, program: Program=None, arguments: IntegerArguments=None):
         self.r = r
         self.program = program
@@ -88,6 +110,9 @@ class StepOutput:
 
 
 class StepInOut:
+    """
+    Combination of stepInput and stepOutput
+    """
     def __init__(self, input: StepInput, output: StepOutput):
         self.input = input
         self.output = output

@@ -61,6 +61,11 @@ class AdditionEnv:
 
 
 class MovePtrProgram(Program):
+    """
+    In the paper appendix, there is no MovePtrProgram
+    There is only ACT
+    Here ACT is divided into MovePtrProgram and WriteProgram
+    """
     output_to_env = True
     PTR_IN1 = 0
     PTR_IN2 = 1
@@ -77,6 +82,11 @@ class MovePtrProgram(Program):
 
 
 class WriteProgram(Program):
+    """
+    In the paper appendix, there is no WriteProgram
+    There is only ACT
+    Here ACT is divided into MovePtrProgram and WriteProgram
+    """
     output_to_env = True
     WRITE_TO_CARRY = 0
     WRITE_TO_OUTPUT = 1

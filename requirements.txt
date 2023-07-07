@@ -4,3 +4,4 @@ pydot-ng==1.0.0
 pyparsing==2.1.1
 PyYAML==3.11
 Theano==0.8.2
+scipy>=1.8.0 # not directly required, pinned by Snyk to avoid a vulnerability
